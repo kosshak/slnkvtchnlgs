@@ -79,6 +79,16 @@
             position: relative;
         }
 
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="50" cy="50" r="2" fill="%234DB6AC"/></svg>') repeat;
+        }
+
         #home h1 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
@@ -145,9 +155,10 @@
         .tech-card {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-left: 4px solid #4DB6AC;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 4px solid #4DB6AC;
+            text-align: center;
         }
 
         .tech-card h3 {
@@ -164,7 +175,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin: 0 auto 1rem;
             font-weight: bold;
         }
 
@@ -180,9 +191,9 @@
             background: white;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
-            border-top: 4px solid #4DB6AC;
+            border-left: 4px solid #4DB6AC;
         }
 
         .benefit-value {
@@ -226,8 +237,25 @@
             background: white;
             padding: 1.5rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-right: 4px solid #4DB6AC;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #4DB6AC;
+        }
+
+        /* Поддержка фонда */
+        .funding-banner {
+            background: linear-gradient(135deg, #4DB6AC 0%, #80CBC4 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .funding-logo {
+            max-width: 200px;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
         }
 
         /* Презентация */
@@ -235,7 +263,7 @@
             background: #000000;
             color: white;
             padding: 3rem 2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 3rem 0;
             text-align: center;
         }
@@ -272,22 +300,6 @@
             border: 1px solid #4DB6AC;
         }
 
-        /* Поддержка фонда */
-        .funding-section {
-            background: #E0F2F1;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .funding-logo {
-            max-width: 200px;
-            height: auto;
-            margin: 1rem auto;
-            display: block;
-        }
-
         /* Футер */
         footer {
             background: #000000;
@@ -314,13 +326,6 @@
         h3 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
-        }
-
-        .divider {
-            height: 1px;
-            background: #4DB6AC;
-            margin: 2rem 0;
-            opacity: 0.3;
         }
 
         /* Адаптивность */
@@ -526,6 +531,7 @@
             <p style="text-align: center; margin-bottom: 2rem;">Ознакомьтесь с подробной презентацией нашего проекта</p>
             
             <div class="presentation-section">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">📊</div>
                 <h3>ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ ДЛЯ УПРАВЛЕНИЯ БПЛА</h3>
                 <p style="margin: 1rem 0 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
                     Полная презентация с техническими деталями, графиками и результатами исследований
@@ -556,16 +562,11 @@
                 </div>
             </div>
 
-            <div class="divider"></div>
-
-            <!-- Поддержка фонда -->
-            <div class="funding-section">
+            <!-- Баннер фонда -->
+            <div class="funding-banner">
                 <h3>СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
-                
-                <!-- Логотип фонда -->
                 <img src="/fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo">
-                
-                <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <p style="margin-top: 1rem; font-weight: 600;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
                     в рамках программы "Студенческий стартап" федерального проекта "Платформа университетского технологического предпринимательства".
                 </p>
@@ -615,6 +616,37 @@
             } else {
                 nav.style.background = '#000000';
             }
+        });
+
+        // Проверка существования файлов
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем доступность PDF
+            fetch('/presentation.pdf')
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('PDF файл не найден: presentation.pdf');
+                        const downloadLink = document.querySelector('.download-link');
+                        if (downloadLink) {
+                            downloadLink.style.opacity = '0.5';
+                            downloadLink.style.cursor = 'not-allowed';
+                            downloadLink.onclick = (e) => e.preventDefault();
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.warn('Ошибка при проверке PDF файла:', error);
+                });
+
+            // Проверяем доступность логотипа
+            fetch('/fond-logo.png')
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn('Логотип не найден: fond-logo.png');
+                    }
+                })
+                .catch(error => {
+                    console.warn('Ошибка при проверке логотипа:', error);
+                });
         });
     </script>
 </body>
