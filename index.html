@@ -241,23 +241,6 @@
             border-left: 4px solid #4DB6AC;
         }
 
-        /* Поддержка фонда */
-        .funding-banner {
-            background: linear-gradient(135deg, #4DB6AC 0%, #80CBC4 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 3rem 0;
-            text-align: center;
-        }
-
-        .funding-logo {
-            max-width: 200px;
-            height: auto;
-            margin: 1rem auto;
-            display: block;
-        }
-
         /* Презентация */
         .presentation-section {
             background: #000000;
@@ -300,6 +283,26 @@
             border: 1px solid #4DB6AC;
         }
 
+        /* Поддержка фонда */
+        .funding-section {
+            background: #E0F2F1;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .funding-logo {
+            max-width: 200px;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
+            border: 2px solid #4DB6AC;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+        }
+
         /* Футер */
         footer {
             background: #000000;
@@ -326,6 +329,13 @@
         h3 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: #4DB6AC;
+            margin: 2rem 0;
+            opacity: 0.3;
         }
 
         /* Адаптивность */
@@ -562,11 +572,19 @@
                 </div>
             </div>
 
-            <!-- Баннер фонда -->
-            <div class="funding-banner">
+            <div class="divider"></div>
+
+            <!-- Поддержка фонда -->
+            <div class="funding-section">
                 <h3>СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
-                <img src="/fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo">
-                <p style="margin-top: 1rem; font-weight: 600;">
+                
+                <!-- Логотип фонда -->
+                <img src="/fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" 
+                     onerror="this.style.display='none'">
+                
+                <h4 style="color: #4DB6AC; margin: 1rem 0;">Фонд содействия инновациям</h4>
+                
+                <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
                     в рамках программы "Студенческий стартап" федерального проекта "Платформа университетского технологического предпринимательства".
                 </p>
@@ -642,6 +660,16 @@
                 .then(response => {
                     if (!response.ok) {
                         console.warn('Логотип не найден: fond-logo.png');
+                        // Можно добавить placeholder текст вместо логотипа
+                        const fundingSection = document.querySelector('.funding-section');
+                        if (fundingSection) {
+                            const logoPlaceholder = document.createElement('div');
+                            logoPlaceholder.innerHTML = '<div style="font-size: 3rem; margin: 1rem 0;">🏛️</div><p style="font-weight: bold; color: #4DB6AC;">Фонд содействия инновациям</p>';
+                            const existingLogo = fundingSection.querySelector('.funding-logo');
+                            if (existingLogo) {
+                                existingLogo.parentNode.replaceChild(logoPlaceholder, existingLogo);
+                            }
+                        }
                     }
                 })
                 .catch(error => {
