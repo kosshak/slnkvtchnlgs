@@ -14,9 +14,9 @@
 
         body {
             line-height: 1.6;
-            color: #333;
+            color: #FFFFFF;
             font-family: 'Open Sans', sans-serif;
-            background: #FFFFFF;
+            background: #000000;
             overflow-x: hidden;
         }
 
@@ -33,6 +33,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(77, 182, 172, 0.3);
         }
 
         nav ul {
@@ -66,6 +67,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #000000;
         }
 
         .container {
@@ -86,6 +88,7 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            color: #FFFFFF;
         }
 
         #home .subtitle {
@@ -93,11 +96,12 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             opacity: 0.9;
+            color: #CCCCCC;
         }
 
         /* Слайды презентации */
         .slide {
-            background: #FFFFFF;
+            background: #000000;
             text-align: center;
         }
 
@@ -105,15 +109,18 @@
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.2);
             margin: 0 auto;
             display: block;
+            /* Оптимизация загрузки */
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .slide-caption {
             margin-top: 1.5rem;
-            color: #666;
+            color: #4DB6AC;
             font-size: 0.9rem;
+            font-weight: 600;
         }
 
         /* Навигация между слайдами */
@@ -137,16 +144,17 @@
 
         .slide-nav a:hover {
             background: #4DB6AC;
-            color: white;
+            color: #000000;
         }
 
         /* Поддержка фонда */
         .funding-section {
-            background: #E0F2F1;
+            background: #1A1A1A;
             padding: 2rem;
             border-radius: 8px;
             margin: 2rem 0;
             text-align: center;
+            border: 1px solid rgba(77, 182, 172, 0.3);
         }
 
         .funding-logo {
@@ -154,6 +162,9 @@
             height: auto;
             margin: 1rem auto;
             display: block;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
         }
 
         /* Контакты */
@@ -177,6 +188,7 @@
             color: white;
             padding: 2rem 1rem;
             text-align: center;
+            border-top: 1px solid rgba(77, 182, 172, 0.3);
         }
 
         .footer-content {
@@ -192,6 +204,19 @@
             background: #4DB6AC;
             margin: 2rem 0;
             opacity: 0.3;
+        }
+
+        /* Индикатор загрузки изображения */
+        .slide-image[src] {
+            background: linear-gradient(45deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
+            background-size: 200% 200%;
+            animation: loading 1.5s ease infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Адаптивность */
@@ -237,7 +262,7 @@
     </style>
 </head>
 <body>
-    <!-- Навигация -->
+    
     <nav>
         <ul>
             <li><a href="#home">Главная</a></li>
@@ -249,7 +274,7 @@
         </ul>
     </nav>
 
-    <!-- Главная секция -->
+    
     <section id="home">
         <div class="container">
             <h1>ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ</h1>
@@ -263,10 +288,10 @@
         </div>
     </section>
 
-    <!-- Слайд 1: О продукте -->
+    
     <section id="slide1" class="slide">
         <div class="container">
-            <img src="side1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image">
+            <img src="slide1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 1: О продукте</div>
             <div class="slide-nav">
                 <a href="#home">На главную</a>
@@ -275,10 +300,10 @@
         </div>
     </section>
 
-    <!-- Слайд 2: Технологический стек и преимущества -->
+    
     <section id="slide2" class="slide">
         <div class="container">
-            <img src="side2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image">
+            <img src="slide2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 2: Технологический стек и преимущества</div>
             <div class="slide-nav">
                 <a href="#slide1">Назад</a>
@@ -287,10 +312,10 @@
         </div>
     </section>
 
-    <!-- Слайд 3: Области применения, рынок и потребители -->
+    
     <section id="slide3" class="slide">
         <div class="container">
-            <img src="side3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image">
+            <img src="slide3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 3: Области применения, рынок и потребители</div>
             <div class="slide-nav">
                 <a href="#slide2">Назад</a>
@@ -299,10 +324,10 @@
         </div>
     </section>
 
-    <!-- Слайд 4: Технические характеристики -->
+    
     <section id="slide4" class="slide">
         <div class="container">
-            <img src="side4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image">
+            <img src="slide4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 4: Технические характеристики</div>
             <div class="slide-nav">
                 <a href="#slide3">Назад</a>
@@ -311,10 +336,10 @@
         </div>
     </section>
 
-    <!-- Контакты и поддержка -->
+    
     <section id="contact" style="background: #000000; color: white;">
         <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">СВЯЗЬ С НАМИ</h2>
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center; color: #4DB6AC;">СВЯЗЬ С НАМИ</h2>
             
             <div class="contact-info">
                 <div class="contact-card">
@@ -332,14 +357,14 @@
 
             <div class="divider"></div>
 
-            <!-- Поддержка фонда -->
+            
             <div class="funding-section">
-                <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
+                <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
                 
-                <!-- Логотип фонда -->
-                <img src="ford-logo.jpg" alt="Фонд содействия инновациям" class="funding-logo">
                 
-                <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #000000;">
+                <img src="ford-logo.jpg" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
+                
+                <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #CCCCCC;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
                     в рамках программы "Студенческий стартап" федерального проекта "Платформа университетского технологического предпринимательства".
                 </p>
@@ -352,20 +377,20 @@
         </div>
     </section>
 
-    <!-- Футер -->
+    
     <footer>
         <div class="footer-content">
             <div>
-                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">ООО "САЛЬНИКОВ ТЕХНОЛОГИИ"</h4>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">ООО "САЛЬНИКОВ ТЕХНОЛОГИИ"</h4>
                 <p style="font-size: 0.9rem;">Разработка инновационных решений для управления БПЛА</p>
             </div>
             <div>
-                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">КОНТАКТЫ</h4>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">КОНТАКТЫ</h4>
                 <p style="font-size: 0.9rem;">kosshak17@yandex.ru</p>
                 <p style="font-size: 0.9rem;">+7 963-141-06-70</p>
             </div>
             <div>
-                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">ПОДДЕРЖКА</h4>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">ПОДДЕРЖКА</h4>
                 <p style="font-size: 0.8rem;">Технология разработана в рамках грантовой поддержки Фонда Содействия Инновациям. 2024 г.</p>
             </div>
         </div>
@@ -395,6 +420,16 @@
                 } else {
                     nav.style.background = '#000000';
                 }
+            });
+
+            // Обработка ошибок загрузки изображений
+            document.querySelectorAll('.slide-image').forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.minHeight = '400px';
+                    this.style.background = '#1A1A1A';
+                    this.style.border = '2px dashed #4DB6AC';
+                    console.error('Не удалось загрузить изображение:', this.src);
+                });
             });
         });
     </script>
