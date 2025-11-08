@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помехоустойчивая технология обработки сигналов для управления БПЛА</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #FFFFFF;
+            font-family: 'Open Sans', sans-serif;
+            background: #000000;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, nav {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Навигация */
+        nav {
+            background: #000000;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(77, 182, 172, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: #4DB6AC;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: #80CBC4;
+        }
+
+        /* Секции */
+        section {
+            min-height: 100vh;
+            padding: 5rem 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        /* Главная секция */
+        #home {
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+            color: white;
+            text-align: center;
+        }
+
+        /* Логотип на главной */
+        .logo-container {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-logo {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 12px rgba(77, 182, 172, 0.4));
+            transition: transform 0.3s ease;
+        }
+
+        .main-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #home h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: #FFFFFF;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        #home .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            color: #CCCCCC;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        #home .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        #home .cta-button a {
+            color: #4DB6AC;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.5rem;
+            border-bottom: 2px solid #4DB6AC;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        #home .cta-button a:hover {
+            color: #80CBC4;
+            border-color: #80CBC4;
+        }
+
+        /* Слайды презентации */
+        .slide {
+            background: #000000;
+            text-align: center;
+        }
+
+        .slide-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.2);
+            margin: 0 auto;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .slide-caption {
+            margin-top: 1.5rem;
+            color: #4DB6AC;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Навигация между слайдами */
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+
+        .slide-nav a {
+            color: #4DB6AC;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 1.5rem;
+            border: 2px solid #4DB6AC;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .slide-nav a:hover {
+            background: #4DB6AC;
+            color: #000000;
+        }
+
+        /* Поддержка фонда */
+        .funding-section {
+            background: #1A1A1A;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid rgba(77, 182, 172, 0.3);
+        }
+
+        .funding-logo {
+            max-width: 200px;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(77, 182, 172, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #4DB6AC;
+        }
+
+        /* Футер */
+        footer {
+            background: #000000;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(77, 182, 172, 0.3);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            height: 1px;
+            background: #4DB6AC;
+            margin: 2rem 0;
+            opacity: 0.3;
+        }
+
+        /* Индикатор загрузки изображения */
+        .slide-image[src] {
+            background: linear-gradient(45deg, #1A1A1A 25%, #2A2A2A 50%, #1A1A1A 75%);
+            background-size: 200% 200%;
+            animation: loading 1.5s ease infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+            }
+            
+            section {
+                padding: 4rem 1rem 1rem;
+                min-height: auto;
+            }
+
+            .slide-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .slide-nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .main-logo {
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 3.5rem 0.5rem 0.5rem;
+            }
+            
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .contact-card {
+                padding: 1rem;
+            }
+
+            .main-logo {
+                max-width: 120px;
+            }
+            
+            .logo-container {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#slide1">О продукте</a></li>
+            <li><a href="#slide2">Технологии</a></li>
+            <li><a href="#slide3">Применение</a></li>
+            <li><a href="#slide4">Характеристики</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    
+    <section id="home">
+        <div class="container">
+            
+            <div class="logo-container">
+                <img src="logo.png" alt="Сальников Технологии" class="main-logo">
+            </div>
+            
+            <h1>ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ</h1>
+            <p class="subtitle">Для управления беспилотными летательными аппаратами на основе голографического кодирования, DFT-s-OFDM и формирующей фильтрации</p>
+            
+            <div class="cta-button">
+                <a href="#slide1">Смотреть презентацию</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="slide1" class="slide">
+        <div class="container">
+            <img src="slide1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 1: О продукте</div>
+            <div class="slide-nav">
+                <a href="#home">На главную</a>
+                <a href="#slide2">Далее →</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="slide2" class="slide">
+        <div class="container">
+            <img src="slide2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 2: Технологический стек и преимущества</div>
+            <div class="slide-nav">
+                <a href="#slide1">← Назад</a>
+                <a href="#slide3">Далее →</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="slide3" class="slide">
+        <div class="container">
+            <img src="slide3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 3: Области применения, рынок и потребители</div>
+            <div class="slide-nav">
+                <a href="#slide2">← Назад</a>
+                <a href="#slide4">Далее →</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="slide4" class="slide">
+        <div class="container">
+            <img src="slide4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 4: Технические характеристики</div>
+            <div class="slide-nav">
+                <a href="#slide3">← Назад</a>
+                <a href="#contact">Контакты →</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact" style="background: #000000; color: white;">
+        <div class="container">
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center; color: #4DB6AC;">СВЯЗЬ С НАМИ</h2>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.2rem;">КОНТАКТЫ</h3>
+                    <p><strong>Email:</strong> kosshak17@yandex.ru</p>
+                    <p><strong>Телефон:</strong> +7 963-141-06-70</p>
+                </div>
+                <div class="contact-card">
+                    <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.2rem;">ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ</h3>
+                    <p>ООО "САЛЬНИКОВ ТЕХНОЛОГИИ"</p>
+                    <p>ИНН 0274391557 | ОГРН 1240200041047</p>
+                    <p>450077, Республика Башкортостан, г. Уфа, ул. Цорулы, д. 85, кв. 16</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            
+            <div class="funding-section">
+                <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
+                
+                
+                <img src="fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
+                
+                <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #CCCCCC;">
+                    Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
+                    в рамках программы "Студенческий стартап" федерального проекта "Платформа университетского технологического предпринимательства".
+                </p>
+            </div>
+
+            <div class="slide-nav" style="margin-top: 3rem;">
+                <a href="#slide4">← Назад к характеристикам</a>
+                <a href="#home">↑ На главную</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">ООО "САЛЬНИКОВ ТЕХНОЛОГИИ"</h4>
+                <p style="font-size: 0.9rem;">Разработка инновационных решений для управления БПЛА</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">КОНТАКТЫ</h4>
+                <p style="font-size: 0.9rem;">kosshak17@yandex.ru</p>
+                <p style="font-size: 0.9rem;">+7 963-141-06-70</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: #4DB6AC;">ПОДДЕРЖКА</h4>
+                <p style="font-size: 0.8rem;">Технология разработана в рамках грантовой поддержки Фонда Содействия Инновациям. 2024 г.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Фиксированная навигация с эффектом прозрачности
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(0, 0, 0, 0.95)';
+                    nav.style.boxShadow = '0 2px 10px rgba(77, 182, 172, 0.2)';
+                } else {
+                    nav.style.background = '#000000';
+                    nav.style.boxShadow = 'none';
+                }
+            });
+
+            // Обработка ошибок загрузки изображений
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.minHeight = '300px';
+                    this.style.background = '#1A1A1A';
+                    this.style.border = '2px dashed #4DB6AC';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
+                    console.error('Не удалось загрузить изображение:', this.src);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
