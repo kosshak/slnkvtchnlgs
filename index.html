@@ -6,7 +6,6 @@
     <title>Помехоустойчивая технология обработки сигналов для управления БПЛА</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
     <style>
-        /* Базовые стили - загружаются первыми */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +17,7 @@
             color: #333;
             font-family: 'Open Sans', sans-serif;
             background: #FFFFFF;
-            overflow-x: hidden; /* Предотвращает горизонтальный скролл */
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, nav {
@@ -26,7 +25,7 @@
             font-weight: 700;
         }
 
-        /* Критический CSS - загружается сразу */
+        /* Навигация */
         nav {
             background: #000000;
             padding: 1rem;
@@ -56,18 +55,185 @@
             white-space: nowrap;
         }
 
+        nav a:hover {
+            color: #80CBC4;
+        }
+
+        /* Секции */
         section {
             min-height: 100vh;
             padding: 5rem 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
+            width: 100%;
         }
 
-        /* Отложенная загрузка остальных стилей */
+        /* Главная секция */
+        #home {
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #home h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        #home .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Слайды презентации */
+        .slide {
+            background: #FFFFFF;
+            text-align: center;
+        }
+
+        .slide-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .slide-caption {
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Навигация между слайдами */
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+
+        .slide-nav a {
+            color: #4DB6AC;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: 2px solid #4DB6AC;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .slide-nav a:hover {
+            background: #4DB6AC;
+            color: white;
+        }
+
+        /* Поддержка фонда */
+        .funding-section {
+            background: #E0F2F1;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .funding-logo {
+            max-width: 200px;
+            height: auto;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        /* Контакты */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(77, 182, 172, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #4DB6AC;
+        }
+
+        /* Футер */
+        footer {
+            background: #000000;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            height: 1px;
+            background: #4DB6AC;
+            margin: 2rem 0;
+            opacity: 0.3;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.3rem 0;
+            }
+            
+            section {
+                padding: 4rem 1rem 1rem;
+                min-height: auto;
+            }
+
+            .slide-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .slide-nav a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 3.5rem 0.5rem 0.5rem;
+            }
+            
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .contact-card {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -75,369 +241,78 @@
     <nav>
         <ul>
             <li><a href="#home">Главная</a></li>
-            <li><a href="#about">О продукте</a></li>
-            <li><a href="#tech">Технологии</a></li>
-            <li><a href="#benefits">Преимущества</a></li>
-            <li><a href="#applications">Применение</a></li>
-            <li><a href="#specs">Характеристики</a></li>
-            <li><a href="#presentation">Презентация</a></li>
+            <li><a href="#slide1">О продукте</a></li>
+            <li><a href="#slide2">Технологии</a></li>
+            <li><a href="#slide3">Применение</a></li>
+            <li><a href="#slide4">Характеристики</a></li>
             <li><a href="#contact">Контакты</a></li>
         </ul>
     </nav>
 
     <!-- Главная секция -->
-    <section id="home" style="background: #000000; color: white; display: flex; align-items: center; text-align: center;">
+    <section id="home">
         <div class="container">
-            <h1 style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5rem; line-height: 1.2;">
-                ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ
-            </h1>
-            <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); max-width: 600px; margin: 0 auto 2rem; opacity: 0.9;">
-                Для управления беспилотными летательными аппаратами на основе голографического кодирования, DFT-s-OFDM и формирующей фильтрации
-            </p>
+            <h1>ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ</h1>
+            <p class="subtitle">Для управления беспилотными летательными аппаратами на основе голографического кодирования, DFT-s-OFDM и формирующей фильтрации</p>
             
             <div style="margin-top: 2rem;">
-                <a href="#about" style="color: #4DB6AC; text-decoration: none; font-size: 1.1rem; margin: 0 1rem; padding: 0.5rem 0; border-bottom: 2px solid transparent; transition: all 0.3s; font-weight: 600;">Узнать больше</a>
-                <span style="color: #4DB6AC; margin: 0 0.5rem;">•</span>
-                <a href="#presentation" style="color: #4DB6AC; text-decoration: none; font-size: 1.1rem; margin: 0 1rem; padding: 0.5rem 0; border-bottom: 2px solid transparent; transition: all 0.3s; font-weight: 600;">Смотреть презентацию</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- О продукте -->
-    <section id="about" style="background: #FFFFFF; color: #333;">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">О ПРОДУКТЕ</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
-                Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ, 
-                обеспечивающее стабильную связь при интенсивных помехах, коррекцию сигнала в реальном времени 
-                и совместимость с существующими SDR-платформами.
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4DB6AC;">
-                    <div style="background: #4DB6AC; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">1</div>
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">Лабораторные исследования</h3>
-                    <p>Глубокий анализ и тестирование в контролируемых условиях</p>
-                </div>
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4DB6AC;">
-                    <div style="background: #4DB6AC; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">2</div>
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">Интеграция в промышленные БПЛА</h3>
-                    <p>Адаптация технологии для серийных беспилотных платформ</p>
-                </div>
-                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #4DB6AC;">
-                    <div style="background: #4DB6AC; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-weight: bold;">3</div>
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">Образовательные центры</h3>
-                    <p>Внедрение в учебные программы и исследовательские проекты</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Остальные секции... -->
-    <!-- Для экономии места покажу только структуру, полный код будет ниже -->
-
-    <style>
-        /* Отложенная загрузка остальных стилей */
-        .section-dark { background: #000000; color: white; }
-        .section-light { background: #FFFFFF; color: #333; }
-        .section-mint { background: #E0F2F1; color: #333; }
-        
-        .home-link:hover { border-bottom-color: #4DB6AC; color: #80CBC4; }
-        
-        .tech-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 1.5rem; 
-            margin: 2rem 0; 
-        }
-        
-        .tech-card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-            border-left: 4px solid #4DB6AC; 
-        }
-        
-        .benefits-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 1rem; 
-            margin: 2rem 0; 
-        }
-        
-        .benefit-card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-            text-align: center; 
-            border-top: 4px solid #4DB6AC; 
-        }
-        
-        .benefit-value { 
-            font-size: 1.8rem; 
-            font-weight: 700; 
-            color: #4DB6AC; 
-            margin-bottom: 0.5rem; 
-        }
-        
-        .applications { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 1rem; 
-            margin: 2rem 0; 
-        }
-        
-        .application-card { 
-            background: rgba(77, 182, 172, 0.1); 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            text-align: center; 
-            border: 1px solid #4DB6AC; 
-        }
-        
-        .application-icon { 
-            font-size: 1.8rem; 
-            margin-bottom: 1rem; 
-            color: #4DB6AC; 
-        }
-        
-        .specs-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 1rem; 
-            margin: 2rem 0; 
-        }
-        
-        .spec-card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-            border-right: 4px solid #4DB6AC; 
-        }
-        
-        .presentation-section { 
-            background: #000000; 
-            color: white; 
-            padding: 2rem; 
-            border-radius: 8px; 
-            margin: 2rem 0; 
-            text-align: center; 
-        }
-        
-        .download-link { 
-            color: #4DB6AC; 
-            text-decoration: none; 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            padding: 0.5rem 0; 
-            border-bottom: 2px solid #4DB6AC; 
-            transition: all 0.3s; 
-            display: inline-block; 
-            margin-top: 1rem; 
-        }
-        
-        .download-link:hover { 
-            color: #80CBC4; 
-            border-bottom-color: #80CBC4; 
-        }
-        
-        .contact-info { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 1.5rem; 
-            margin-top: 2rem; 
-        }
-        
-        .contact-card { 
-            background: rgba(77, 182, 172, 0.1); 
-            padding: 1.5rem; 
-            border-radius: 8px; 
-            border: 1px solid #4DB6AC; 
-        }
-        
-        .funding-section { 
-            background: #E0F2F1; 
-            padding: 2rem; 
-            border-radius: 8px; 
-            margin: 2rem 0; 
-            text-align: center; 
-        }
-        
-        .funding-logo { 
-            max-width: 180px; 
-            height: auto; 
-            margin: 1rem auto; 
-            display: block; 
-        }
-        
-        footer { 
-            background: #000000; 
-            color: white; 
-            padding: 2rem 1rem; 
-            text-align: center; 
-        }
-        
-        .footer-content { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 1.5rem; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        
-        .divider { 
-            height: 1px; 
-            background: #4DB6AC; 
-            margin: 2rem 0; 
-            opacity: 0.3; 
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            nav ul { flex-direction: column; align-items: center; }
-            nav li { margin: 0.3rem 0; }
-            section { padding: 4rem 1rem 1rem; min-height: auto; }
-            .home-links { display: flex; flex-direction: column; gap: 1rem; }
-            .home-link-divider { display: none; }
-            .tech-grid, .benefits-grid, .applications, .specs-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 480px) {
-            section { padding: 3.5rem 0.5rem 0.5rem; }
-            .container { padding: 0 0.5rem; }
-            .tech-card, .benefit-card, .application-card, .spec-card { padding: 1rem; }
-        }
-    </style>
-
-    <!-- Технологии -->
-    <section id="tech" class="section-mint">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">ТЕХНОЛОГИЧЕСКИЙ СТЕК</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Три ключевых технологии для превосходной помехоустойчивости</p>
-            
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">ГОЛОГРАФИЧЕСКОЕ КОДИРОВАНИЕ</h3>
-                    <p>Повышение помехоустойчивости и пропускной способности. Преобразует данные в "голограмму" сигнала, снижает количество пилот-сигналов, обеспечивает устойчивость к активным помехам.</p>
-                </div>
-                <div class="tech-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">DFT-S-OFDM</h3>
-                    <p>Эффективность и стабильность относительно стандартного OFDM. Распределяет данные по множеству поднесущих, снижает межсимвольную интерференцию, оптимизирует использование спектра.</p>
-                </div>
-                <div class="tech-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.2rem;">ФОРМИРУЮЩАЯ ФИЛЬТРАЦИЯ</h3>
-                    <p>Подавляет внеполосные излучения, снижает пик-фактор (PAPR), повышает эффективность компенсации частотного/временного рассогласования (CFO/STO).</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Преимущества -->
-    <section id="benefits" class="section-light">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">ОСНОВНЫЕ ПРЕИМУЩЕСТВА</h2>
-            
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-value">2-3 дБ</div>
-                    <p>Снижение уровня PAPR</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-value">15-20%</div>
-                    <p>Снижение деградации PAPR в сложных каналах</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-value">10-15%</div>
-                    <p>Повышение стабильности сигнала в условиях помех</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-value">На порядок</div>
-                    <p>Снижение вероятности битовой ошибки при SNR = 6 дБ</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Области применения -->
-    <section id="applications" class="section-dark">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">ОБЛАСТИ ПРИМЕНЕНИЯ</h2>
-            <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">Где жизненно важна стабильная связь?</p>
-            
-            <div class="applications">
-                <div class="application-card">
-                    <div class="application-icon">🚁</div>
-                    <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Поисково-спасательные операции</h4>
-                    <p style="font-size: 0.9rem;">Поиск людей в труднодоступных зонах, ЧС</p>
-                </div>
-                <div class="application-card">
-                    <div class="application-icon">🌳</div>
-                    <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Мониторинг окружающей среды</h4>
-                    <p style="font-size: 0.9rem;">Лесные пожары, загрязнения, климатические изменения</p>
-                </div>
-                <div class="application-card">
-                    <div class="application-icon">🌾</div>
-                    <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Сельское хозяйство</h4>
-                    <p style="font-size: 0.9rem;">Точное земледелие, опрыскивание, мониторинг полей</p>
-                </div>
-                <div class="application-card">
-                    <div class="application-icon">🏗️</div>
-                    <h4 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Инспекция инфраструктуры</h4>
-                    <p style="font-size: 0.9rem;">Мосты, ЛЭП, трубопроводы, промышленные объекты</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Технические характеристики -->
-    <section id="specs" class="section-light">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</h2>
-            
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.1rem;">Поддерживаемые технологии</h3>
-                    <p>OFDM, DFT-s-OFDM, IFDMA, QPSK, QAM</p>
-                </div>
-                <div class="spec-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.1rem;">Анализируемые параметры</h3>
-                    <p>PAPR, OOBE, ACPR, CFO, STO, BER</p>
-                </div>
-                <div class="spec-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.1rem;">Аппаратная база</h3>
-                    <p>Программируемые SDR-устройства, ПЛИС, спектроанализаторы</p>
-                </div>
-                <div class="spec-card">
-                    <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.1rem;">Форматы данных</h3>
-                    <p>Бинарные IQ-файлы, совместимость с MATLAB, GNU Radio, Python</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Презентация -->
-    <section id="presentation" class="section-mint">
-        <div class="container">
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">ПРЕЗЕНТАЦИЯ ПРОЕКТА</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Ознакомьтесь с подробной презентацией нашего проекта</p>
-            
-            <div class="presentation-section">
-                <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ ДЛЯ УПРАВЛЕНИЯ БПЛА</h3>
-                <p style="margin: 1rem 0 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Полная презентация с техническими деталями, графиками и результатами исследований
-                </p>
-                <a href="/presentation.pdf" class="download-link" target="_blank">
-                    Скачать презентацию (PDF)
+                <a href="#slide1" style="color: #4DB6AC; text-decoration: none; font-size: 1.1rem; margin: 0 1rem; padding: 0.5rem 0; border-bottom: 2px solid #4DB6AC; transition: all 0.3s; font-weight: 600;">
+                    Смотреть презентацию
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section id="contact" class="section-dark">
+    <!-- Слайд 1: О продукте -->
+    <section id="slide1" class="slide">
+        <div class="container">
+            <img src="slides/slide1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 1: О продукте</div>
+            <div class="slide-nav">
+                <a href="#home">На главную</a>
+                <a href="#slide2">Далее</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайд 2: Технологический стек и преимущества -->
+    <section id="slide2" class="slide">
+        <div class="container">
+            <img src="slides/slide2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 2: Технологический стек и преимущества</div>
+            <div class="slide-nav">
+                <a href="#slide1">Назад</a>
+                <a href="#slide3">Далее</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайд 3: Области применения, рынок и потребители -->
+    <section id="slide3" class="slide">
+        <div class="container">
+            <img src="slides/slide3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 3: Области применения, рынок и потребители</div>
+            <div class="slide-nav">
+                <a href="#slide2">Назад</a>
+                <a href="#slide4">Далее</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Слайд 4: Технические характеристики -->
+    <section id="slide4" class="slide">
+        <div class="container">
+            <img src="slides/slide4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image" loading="lazy">
+            <div class="slide-caption">Слайд 4: Технические характеристики</div>
+            <div class="slide-nav">
+                <a href="#slide3">Назад</a>
+                <a href="#contact">Контакты</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты и поддержка -->
+    <section id="contact" style="background: #000000; color: white;">
         <div class="container">
             <h2 style="font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 2rem; text-align: center;">СВЯЗЬ С НАМИ</h2>
             
@@ -462,12 +337,17 @@
                 <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
                 
                 <!-- Логотип фонда -->
-                <img src="/fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
+                <img src="fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
                 
                 <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #000000;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
                     в рамках программы "Студенческий стартап" федерального проекта "Платформа университетского технологического предпринимательства".
                 </p>
+            </div>
+
+            <div class="slide-nav" style="margin-top: 3rem;">
+                <a href="#slide4">Назад к характеристикам</a>
+                <a href="#home">На главную</a>
             </div>
         </div>
     </section>
@@ -492,20 +372,22 @@
     </footer>
 
     <script>
-        // Упрощенный JavaScript для лучшей производительности
+        // Плавная прокрутка
         document.addEventListener('DOMContentLoaded', function() {
-            // Плавная прокрутка
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        target.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start'
+                        });
                     }
                 });
             });
 
-            // Упрощенная фиксированная навигация
+            // Фиксированная навигация
             window.addEventListener('scroll', function() {
                 const nav = document.querySelector('nav');
                 if (window.scrollY > 50) {
@@ -514,25 +396,25 @@
                     nav.style.background = '#000000';
                 }
             });
-        });
 
-        // Предзагрузка критических ресурсов
-        function preloadCriticalResources() {
-            const links = [
-                { rel: 'preload', href: '/fond-logo.png', as: 'image' }
-            ];
-            
-            links.forEach(link => {
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = link.rel;
-                preloadLink.href = link.href;
-                preloadLink.as = link.as;
-                document.head.appendChild(preloadLink);
-            });
-        }
-        
-        // Запускаем предзагрузку после загрузки страницы
-        window.addEventListener('load', preloadCriticalResources);
+            // Lazy loading для изображений
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+        });
     </script>
 </body>
 </html>
