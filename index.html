@@ -84,19 +84,84 @@
             text-align: center;
         }
 
+        /* Логотип на главной */
+        .logo-container {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .main-logo {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 12px rgba(77, 182, 172, 0.4));
+            transition: transform 0.3s ease;
+        }
+
+        .main-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         #home h1 {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1.5rem;
             line-height: 1.2;
             color: #FFFFFF;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         #home .subtitle {
             font-size: clamp(1rem, 2.5vw, 1.3rem);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 2rem;
             opacity: 0.9;
             color: #CCCCCC;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        #home .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        #home .cta-button a {
+            color: #4DB6AC;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.7rem 1.5rem;
+            border-bottom: 2px solid #4DB6AC;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        #home .cta-button a:hover {
+            color: #80CBC4;
+            border-color: #80CBC4;
         }
 
         /* Слайды презентации */
@@ -112,7 +177,6 @@
             box-shadow: 0 4px 20px rgba(77, 182, 172, 0.2);
             margin: 0 auto;
             display: block;
-            /* Оптимизация загрузки */
             image-rendering: -webkit-optimize-contrast;
         }
 
@@ -136,7 +200,7 @@
             color: #4DB6AC;
             text-decoration: none;
             font-weight: 600;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.5rem;
             border: 2px solid #4DB6AC;
             border-radius: 5px;
             transition: all 0.3s;
@@ -244,6 +308,10 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .main-logo {
+                max-width: 150px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -257,6 +325,14 @@
             
             .contact-card {
                 padding: 1rem;
+            }
+
+            .main-logo {
+                max-width: 120px;
+            }
+            
+            .logo-container {
+                margin-bottom: 1.5rem;
             }
         }
     </style>
@@ -277,13 +353,16 @@
     
     <section id="home">
         <div class="container">
+            
+            <div class="logo-container">
+                <img src="logo.png" alt="Сальников Технологии" class="main-logo">
+            </div>
+            
             <h1>ПОМЕХОУСТОЙЧИВАЯ ТЕХНОЛОГИЯ ОБРАБОТКИ СИГНАЛОВ</h1>
             <p class="subtitle">Для управления беспилотными летательными аппаратами на основе голографического кодирования, DFT-s-OFDM и формирующей фильтрации</p>
             
-            <div style="margin-top: 2rem;">
-                <a href="#slide1" style="color: #4DB6AC; text-decoration: none; font-size: 1.1rem; margin: 0 1rem; padding: 0.5rem 0; border-bottom: 2px solid #4DB6AC; transition: all 0.3s; font-weight: 600;">
-                    Смотреть презентацию
-                </a>
+            <div class="cta-button">
+                <a href="#slide1">Смотреть презентацию</a>
             </div>
         </div>
     </section>
@@ -295,7 +374,7 @@
             <div class="slide-caption">Слайд 1: О продукте</div>
             <div class="slide-nav">
                 <a href="#home">На главную</a>
-                <a href="#slide2">Далее</a>
+                <a href="#slide2">Далее →</a>
             </div>
         </div>
     </section>
@@ -306,8 +385,8 @@
             <img src="slide2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 2: Технологический стек и преимущества</div>
             <div class="slide-nav">
-                <a href="#slide1">Назад</a>
-                <a href="#slide3">Далее</a>
+                <a href="#slide1">← Назад</a>
+                <a href="#slide3">Далее →</a>
             </div>
         </div>
     </section>
@@ -318,8 +397,8 @@
             <img src="slide3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 3: Области применения, рынок и потребители</div>
             <div class="slide-nav">
-                <a href="#slide2">Назад</a>
-                <a href="#slide4">Далее</a>
+                <a href="#slide2">← Назад</a>
+                <a href="#slide4">Далее →</a>
             </div>
         </div>
     </section>
@@ -330,8 +409,8 @@
             <img src="slide4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image" loading="lazy">
             <div class="slide-caption">Слайд 4: Технические характеристики</div>
             <div class="slide-nav">
-                <a href="#slide3">Назад</a>
-                <a href="#contact">Контакты</a>
+                <a href="#slide3">← Назад</a>
+                <a href="#contact">Контакты →</a>
             </div>
         </div>
     </section>
@@ -351,7 +430,7 @@
                     <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.2rem;">ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ</h3>
                     <p>ООО "САЛЬНИКОВ ТЕХНОЛОГИИ"</p>
                     <p>ИНН 0274391557 | ОГРН 1240200041047</p>
-                    <p>450077, Республика Башкортостан, г. Уфа, ул. Цюрупы, д. 85, кв. 16</p>
+                    <p>450077, Республика Башкортостан, г. Уфа, ул. Цорулы, д. 85, кв. 16</p>
                 </div>
             </div>
 
@@ -362,7 +441,7 @@
                 <h3 style="color: #4DB6AC; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
                 
                 
-                <img src="fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
+                <img src="ford-logo.jpg" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
                 
                 <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #CCCCCC;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
@@ -371,8 +450,8 @@
             </div>
 
             <div class="slide-nav" style="margin-top: 3rem;">
-                <a href="#slide4">Назад к характеристикам</a>
-                <a href="#home">На главную</a>
+                <a href="#slide4">← Назад к характеристикам</a>
+                <a href="#home">↑ На главную</a>
             </div>
         </div>
     </section>
@@ -412,22 +491,27 @@
                 });
             });
 
-            // Фиксированная навигация
+            // Фиксированная навигация с эффектом прозрачности
             window.addEventListener('scroll', function() {
                 const nav = document.querySelector('nav');
                 if (window.scrollY > 50) {
                     nav.style.background = 'rgba(0, 0, 0, 0.95)';
+                    nav.style.boxShadow = '0 2px 10px rgba(77, 182, 172, 0.2)';
                 } else {
                     nav.style.background = '#000000';
+                    nav.style.boxShadow = 'none';
                 }
             });
 
             // Обработка ошибок загрузки изображений
-            document.querySelectorAll('.slide-image').forEach(img => {
+            document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('error', function() {
-                    this.style.minHeight = '400px';
+                    this.style.minHeight = '300px';
                     this.style.background = '#1A1A1A';
                     this.style.border = '2px dashed #4DB6AC';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
                     console.error('Не удалось загрузить изображение:', this.src);
                 });
             });
