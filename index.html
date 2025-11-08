@@ -266,7 +266,7 @@
     <!-- Слайд 1: О продукте -->
     <section id="slide1" class="slide">
         <div class="container">
-            <img src="slides/slide1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image" loading="lazy">
+            <img src="side1.png" alt="О продукте: Программно-аппаратное решение для устойчивого управления БПЛА в условиях РЭБ" class="slide-image">
             <div class="slide-caption">Слайд 1: О продукте</div>
             <div class="slide-nav">
                 <a href="#home">На главную</a>
@@ -278,7 +278,7 @@
     <!-- Слайд 2: Технологический стек и преимущества -->
     <section id="slide2" class="slide">
         <div class="container">
-            <img src="slides/slide2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image" loading="lazy">
+            <img src="side2.png" alt="Технологический стек и преимущества: Голографическое кодирование, DFT-s-OFDM, формирующая фильтрация" class="slide-image">
             <div class="slide-caption">Слайд 2: Технологический стек и преимущества</div>
             <div class="slide-nav">
                 <a href="#slide1">Назад</a>
@@ -290,7 +290,7 @@
     <!-- Слайд 3: Области применения, рынок и потребители -->
     <section id="slide3" class="slide">
         <div class="container">
-            <img src="slides/slide3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image" loading="lazy">
+            <img src="side3.png" alt="Области применения, рынок и потребители: Поисково-спасательные операции, мониторинг, сельское хозяйство, инспекция инфраструктуры" class="slide-image">
             <div class="slide-caption">Слайд 3: Области применения, рынок и потребители</div>
             <div class="slide-nav">
                 <a href="#slide2">Назад</a>
@@ -302,7 +302,7 @@
     <!-- Слайд 4: Технические характеристики -->
     <section id="slide4" class="slide">
         <div class="container">
-            <img src="slides/slide4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image" loading="lazy">
+            <img src="side4.png" alt="Технические характеристики: Поддерживаемые технологии, анализируемые параметры, аппаратная база, форматы данных" class="slide-image">
             <div class="slide-caption">Слайд 4: Технические характеристики</div>
             <div class="slide-nav">
                 <a href="#slide3">Назад</a>
@@ -337,7 +337,7 @@
                 <h3 style="color: #000000; margin-bottom: 1rem; font-size: 1.3rem;">СИСТЕМА РАЗРАБОТАНА ПРИ ПОДДЕРЖКЕ</h3>
                 
                 <!-- Логотип фонда -->
-                <img src="fond-logo.png" alt="Фонд содействия инновациям" class="funding-logo" loading="lazy">
+                <img src="ford-logo.jpg" alt="Фонд содействия инновациям" class="funding-logo">
                 
                 <p style="margin-top: 1rem; font-weight: 600; max-width: 800px; margin-left: auto; margin-right: auto; color: #000000;">
                     Проект создан при поддержке Федерального государственного бюджетного учреждения "Фонд содействия развитию малых форм предприятий в научно-технической сфере" 
@@ -396,24 +396,6 @@
                     nav.style.background = '#000000';
                 }
             });
-
-            // Lazy loading для изображений
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            }
         });
     </script>
 </body>
